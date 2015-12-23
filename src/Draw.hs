@@ -22,7 +22,6 @@ initLoop cnv f z =
 mainLoop :: Canvas -> Driver -> Complex Double
          -> HRTimeStamp -> HRTimeStamp -> IO ()
 mainLoop cnv f z t0 t1 = do
-    writeLog . show $ z
     (z',t') <- step cnv f z t0 t1
     _ <- requestAnimationFrame (mainLoop cnv f z' t')
     return ()
