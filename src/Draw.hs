@@ -42,12 +42,12 @@ dotN :: Canvas -> Driver -> Complex Double -> Int -> IO (Complex Double)
 -- TODO : monad
 dotN cnv f z 0 = return z
 dotN cnv f z n = do
-    drawDot cnv (z*100)
+    drawDot cnv (z*200)
     dotN cnv f (f z) (n-1)
 
 drawDot :: Canvas -> Complex Double -> IO ()
 drawDot cnv =
-    renderOnTop cnv . translate (250,250)
+    renderOnTop cnv . translate (300,250)
         . color (RGB 0 0 255) . fill . dotAt
 
 dotAt :: Complex Double -> Shape ()
