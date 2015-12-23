@@ -4,3 +4,7 @@ html{
 canvas{
 	background-color:black;
 }
+a {
+	color:#003300;
+	text-decoration: none;
+}
