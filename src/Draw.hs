@@ -1,6 +1,7 @@
 module Draw where
 
 import Data.Complex
+import Control.Monad
 
 import Haste
 import Haste.Graphics.Canvas
@@ -38,12 +39,11 @@ step cnv f z t0 t1 =
         return (z', t1-rt)
 
 dotN :: Canvas -> Driver -> Complex Double -> Int -> IO (Complex Double)
--- TODO : fold
 -- TODO : monad
-dotN cnv f z 0 = return z
-dotN cnv f z n = do
-    drawDot cnv (z*200)
-    dotN cnv f (f z) (n-1)
+dotN cnv f z n =
+    foldM (\curZ _ -> do
+          drawDot cnv (curZ*200)
+          return $ f curZ) z [1..n]
 
 drawDot :: Canvas -> Complex Double -> IO ()
 drawDot cnv =
